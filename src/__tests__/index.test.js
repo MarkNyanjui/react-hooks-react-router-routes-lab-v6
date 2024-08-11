@@ -6,7 +6,9 @@ import routes from "../routes.js";
 
 
 test('renders the Home component on route "/"', () => {
-  const router = createMemoryRouter(routes)
+  const router = createMemoryRouter(routes, {
+    initialEntries: ['/']
+  })
   render(
     <RouterProvider router={router}/>
 );
@@ -17,9 +19,7 @@ test('renders the Actors component on route "/actors"', () => {
     const router = createMemoryRouter(routes, {
         initialEntries: ['/actors']
     })
-  render(
-    <RouterProvider router={router}/>
-);
+  render(<RouterProvider router={router}/>);
   expect(screen.getByText(/Actors Page/)).toBeInTheDocument();
 });
 
@@ -27,9 +27,7 @@ test('renders the Directors component on route "/directors"', () => {
     const router = createMemoryRouter(routes, {
         initialEntries: ['/directors']
     })
-  render(
-      <RouterProvider router={router}/>
-  );
+  render(<RouterProvider router={router}/>);
   expect(screen.queryByText(/Directors Page/)).toBeInTheDocument();
 });
 
@@ -38,8 +36,7 @@ test('renders the Movie component on route "/movie/:id"', async () => {
     const router = createMemoryRouter(routes, {
         initialEntries: [`/movie/${id}`]
     })
-  render(
-    <RouterProvider router={router}/>
+  render(<RouterProvider router={router}/>
 );
   expect(await screen.findByText(/Doctor Strange/)).toBeInTheDocument();
 });
